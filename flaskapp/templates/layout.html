@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% if title %}
+	<title>NOTES - {{ title }}</title>
+	{% else %}
+	<title>NOTES</title>
+        {% endif %}
+        {% if title == "View Note-Mobile" %}
+        <link rel="stylesheet" href="{{ url_for('static' ,filename='styles/viewnote-mobile.css') }}">
+        {% endif %}
+        {% if title == "View Note" %}
+        <link rel="stylesheet" href="{{ url_for('static' ,filename='styles/viewnote.css') }}">
+	{% endif %}
+        {% if title == "NEWNOTE" or title == "Update Post" %}
+        <link rel="stylesheet" href="{{ url_for('static' ,filename='styles/addnotes.css') }}">
+        {% endif %}
+	{% if title == "REGISTER"  or title == "LOGIN" or title == "Reset Password" %}
+	<link rel="stylesheet" href="{{ url_for('static' ,filename='styles/register.css') }}">
+	{% endif %}
+        {% if title == "LOGIN-MOBILE" or title == "REGISTER-MOBILE" or title == "Reset Password-Mobile" %}
+	<link rel="stylesheet" href="{{ url_for('static' ,filename='styles/login-mobile.css') }}">
+	{% endif %}
+	{% if title == "ACCOUNT" %}
+	<link rel="stylesheet" href="{{ url_for('static' ,filename='styles/account.css') }}">
+        {% endif %}
+        {%if title == "ACCOUNT-MOBILE" %}
+        <link rel="stylesheet" href="{{ url_for('static' ,filename='styles/account-mobile.css') }}">
+        {% endif %}
+        {% if device %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/layout-mobile.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/phone.css') }}">
+        {% else %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/layout.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/pc.css') }}">
+	{% endif %}
+	<script defer type="text/javascript" src="{{ url_for('static' , filename='scripts/layout.js') }}"></script>
+        {% if title == "HOME" %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+        <script defer type="text/javascript" src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+        {% endif %}
+        {% if title == "HOME-MOBILE" %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/index-mobile.css') }}">
+        <script defer type="text/javascript" src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+        {% endif %}
+        {%if title == "NEWNOTE-MOBILE" or title == "Update Post-Mobile"%}
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/addnotes-mobile.css') }}">
+        {% endif %}
+        
+</head>
+<body>
+	{% with messages= get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <ul class="flashes">
+                        {% for category, message in messages %}
+                                <li class="{{ category }}">
+                                        {{ message }}
+                                </li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+        {% endwith %}
+	<div class="container">
+		{% block content %}
+		{% endblock %}
+	</div>
+</body>
+</html>
